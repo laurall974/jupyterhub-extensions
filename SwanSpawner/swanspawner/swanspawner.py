@@ -199,6 +199,9 @@ def define_SwanSpawner_from(base_class):
                     ".".join(["exit_container_code"]),
                     value_cleaned
                 )
+                if int(value_cleaned) == 127:
+                    self.log.warning("Detected user environment script setup failure (exit code 127)")
+                    raise RuntimeError("User environment script failed: Could not find the specified script.")
 
             return container_exit_code
 
